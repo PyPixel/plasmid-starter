@@ -1,4 +1,4 @@
-package org.example.MODNAME.game;
+package io.github.PyPixel.blockgames.game;
 
 import net.minecraft.entity.boss.BossBar;
 import xyz.nucleoid.plasmid.widget.BossBarWidget;
@@ -6,10 +6,10 @@ import xyz.nucleoid.plasmid.widget.GlobalWidgets;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 
-public final class MODCLASSTimerBar {
+public final class BlockGamesTimerBar {
     private final BossBarWidget widget;
 
-    public MODCLASSTimerBar(GlobalWidgets widgets) {
+    public BlockGamesTimerBar(GlobalWidgets widgets) {
         LiteralText title = new LiteralText("Waiting for the game to start...");
         this.widget = widgets.addBossBar(title, BossBar.Color.GREEN, BossBar.Style.NOTCHED_10);
     }

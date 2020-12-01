@@ -1,25 +1,25 @@
-package org.example.MODNAME.game.map;
+package io.github.PyPixel.blockgames.game.map;
 
 import xyz.nucleoid.plasmid.map.template.MapTemplate;
 import xyz.nucleoid.plasmid.util.BlockBounds;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
-import org.example.MODNAME.game.MODCLASSConfig;
+import io.github.PyPixel.blockgames.game.BlockGamesConfig;
 
 import java.util.concurrent.CompletableFuture;
 
-public class MODCLASSMapGenerator {
+public class BlockGamesMapGenerator {
 
-    private final MODCLASSMapConfig config;
+    private final BlockGamesMapConfig config;
 
-    public MODCLASSMapGenerator(MODCLASSMapConfig config) {
+    public BlockGamesMapGenerator(BlockGamesMapConfig config) {
         this.config = config;
     }
 
-    public MODCLASSMap build() {
+    public BlockGamesMap build() {
         MapTemplate template = MapTemplate.createEmpty();
-        MODCLASSMap map = new MODCLASSMap(template, this.config);
+        BlockGamesMap map = new BlockGamesMap(template, this.config);
 
         this.buildSpawn(template);
         map.spawn = new BlockPos(0,65,0);

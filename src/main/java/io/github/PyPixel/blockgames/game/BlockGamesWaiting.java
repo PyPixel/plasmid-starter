@@ -1,4 +1,4 @@
-package org.example.MODNAME.game;
+package io.github.PyPixel.blockgames.game;
 
 import net.minecraft.util.ActionResult;
 import xyz.nucleoid.plasmid.game.*;
@@ -6,34 +6,34 @@ import xyz.nucleoid.plasmid.game.event.*;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.world.GameMode;
-import org.example.MODNAME.game.map.MODCLASSMap;
-import org.example.MODNAME.game.map.MODCLASSMapGenerator;
+import io.github.PyPixel.blockgames.game.map.BlockGamesMap;
+import io.github.PyPixel.blockgames.game.map.BlockGamesMapGenerator;
 import xyz.nucleoid.fantasy.BubbleWorldConfig;
 
-public class MODCLASSWaiting {
+public class BlockGamesWaiting {
     private final GameSpace gameSpace;
-    private final MODCLASSMap map;
-    private final MODCLASSConfig config;
-    private final MODCLASSSpawnLogic spawnLogic;
+    private final BlockGamesMap map;
+    private final BlockGamesConfig config;
+    private final BlockGamesSpawnLogic spawnLogic;
 
-    private MODCLASSWaiting(GameSpace gameSpace, MODCLASSMap map, MODCLASSConfig config) {
+    private BlockGamesWaiting(GameSpace gameSpace, BlockGamesMap map, BlockGamesConfig config) {
         this.gameSpace = gameSpace;
         this.map = map;
         this.config = config;
-        this.spawnLogic = new MODCLASSSpawnLogic(gameSpace, map);
+        this.spawnLogic = new BlockGamesSpawnLogic(gameSpace, map);
     }
 
-    public static GameOpenProcedure open(GameOpenContext<MODCLASSConfig> context) {
-        MODCLASSConfig config = context.getConfig();
-        MODCLASSMapGenerator generator = new MODCLASSMapGenerator(config.mapConfig);
-        MODCLASSMap map = generator.build();
+    public static GameOpenProcedure open(GameOpenContext<BlockGamesConfig> context) {
+        BlockGamesConfig config = context.getConfig();
+        BlockGamesMapGenerator generator = new BlockGamesMapGenerator(config.mapConfig);
+        BlockGamesMap map = generator.build();
 
         BubbleWorldConfig worldConfig = new BubbleWorldConfig()
                 .setGenerator(map.asGenerator(context.getServer()))
                 .setDefaultGameMode(GameMode.SPECTATOR);
 
         return context.createOpenProcedure(worldConfig, game -> {
-            MODCLASSWaiting waiting = new MODCLASSWaiting(game.getSpace(), map, context.getConfig());
+            BlockGamesWaiting waiting = new BlockGamesWaiting(game.getSpace(), map, context.getConfig());
 
             GameWaitingLobby.applyTo(game, config.playerConfig);
 
@@ -44,7 +44,7 @@ public class MODCLASSWaiting {
     }
 
     private StartResult requestStart() {
-        MODCLASSActive.open(this.gameSpace, this.map, this.config);
+        BlockGamesActive.open(this.gameSpace, this.map, this.config);
         return StartResult.OK;
     }
 

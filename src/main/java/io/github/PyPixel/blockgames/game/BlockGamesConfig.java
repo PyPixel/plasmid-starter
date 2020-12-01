@@ -1,22 +1,22 @@
-package org.example.MODNAME.game;
+package io.github.PyPixel.blockgames.game;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import xyz.nucleoid.plasmid.game.config.PlayerConfig;
-import org.example.MODNAME.game.map.MODCLASSMapConfig;
+import io.github.PyPixel.blockgames.game.map.BlockGamesMapConfig;
 
-public class MODCLASSConfig {
-    public static final Codec<MODCLASSConfig> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+public class BlockGamesConfig {
+    public static final Codec<BlockGamesConfig> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             PlayerConfig.CODEC.fieldOf("players").forGetter(config -> config.playerConfig),
-            MODCLASSMapConfig.CODEC.fieldOf("map").forGetter(config -> config.mapConfig),
+            BlockGamesMapConfig.CODEC.fieldOf("map").forGetter(config -> config.mapConfig),
             Codec.INT.fieldOf("time_limit_secs").forGetter(config -> config.timeLimitSecs)
-    ).apply(instance, MODCLASSConfig::new));
+    ).apply(instance, BlockGamesConfig::new));
 
     public final PlayerConfig playerConfig;
-    public final MODCLASSMapConfig mapConfig;
+    public final BlockGamesMapConfig mapConfig;
     public final int timeLimitSecs;
 
-    public MODCLASSConfig(PlayerConfig players, MODCLASSMapConfig mapConfig, int timeLimitSecs) {
+    public BlockGamesConfig(PlayerConfig players, BlockGamesMapConfig mapConfig, int timeLimitSecs) {
         this.playerConfig = players;
         this.mapConfig = mapConfig;
         this.timeLimitSecs = timeLimitSecs;

@@ -1,4 +1,4 @@
-package org.example.MODNAME.game;
+package io.github.PyPixel.blockgames.game;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
@@ -19,47 +19,47 @@ import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.world.GameMode;
-import org.example.MODNAME.game.map.MODCLASSMap;
+import io.github.PyPixel.blockgames.game.map.BlockGamesMap;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class MODCLASSActive {
-    private final MODCLASSConfig config;
+public class BlockGamesActive {
+    private final BlockGamesConfig config;
 
     public final GameSpace gameSpace;
-    private final MODCLASSMap gameMap;
+    private final BlockGamesMap gameMap;
 
     // TODO replace with ServerPlayerEntity if players are removed upon leaving
-    private final Object2ObjectMap<PlayerRef, MODCLASSPlayer> participants;
-    private final MODCLASSSpawnLogic spawnLogic;
-    private final MODCLASSStageManager stageManager;
+    private final Object2ObjectMap<PlayerRef, BlockGamesPlayer> participants;
+    private final BlockGamesSpawnLogic spawnLogic;
+    private final BlockGamesStageManager stageManager;
     private final boolean ignoreWinState;
-    private final MODCLASSTimerBar timerBar;
+    private final BlockGamesTimerBar timerBar;
 
-    private MODCLASSActive(GameSpace gameSpace, MODCLASSMap map, GlobalWidgets widgets, MODCLASSConfig config, Set<PlayerRef> participants) {
+    private BlockGamesActive(GameSpace gameSpace, BlockGamesMap map, GlobalWidgets widgets, BlockGamesConfig config, Set<PlayerRef> participants) {
         this.gameSpace = gameSpace;
         this.config = config;
         this.gameMap = map;
-        this.spawnLogic = new MODCLASSSpawnLogic(gameSpace, map);
+        this.spawnLogic = new BlockGamesSpawnLogic(gameSpace, map);
         this.participants = new Object2ObjectOpenHashMap<>();
 
         for (PlayerRef player : participants) {
-            this.participants.put(player, new MODCLASSPlayer());
+            this.participants.put(player, new BlockGamesPlayer());
         }
 
-        this.stageManager = new MODCLASSStageManager();
+        this.stageManager = new BlockGamesStageManager();
         this.ignoreWinState = this.participants.size() <= 1;
-        this.timerBar = new MODCLASSTimerBar(widgets);
+        this.timerBar = new BlockGamesTimerBar(widgets);
     }
 
-    public static void open(GameSpace gameSpace, MODCLASSMap map, MODCLASSConfig config) {
+    public static void open(GameSpace gameSpace, BlockGamesMap map, BlockGamesConfig config) {
         gameSpace.openGame(game -> {
             Set<PlayerRef> participants = gameSpace.getPlayers().stream()
                     .map(PlayerRef::of)
                     .collect(Collectors.toSet());
             GlobalWidgets widgets = new GlobalWidgets(game);
-            MODCLASSActive active = new MODCLASSActive(gameSpace, map, widgets, config, participants);
+            BlockGamesActive active = new BlockGamesActive(gameSpace, map, widgets, config, participants);
 
             game.setRule(GameRule.CRAFTING, RuleResult.DENY);
             game.setRule(GameRule.PORTALS, RuleResult.DENY);
@@ -134,7 +134,7 @@ public class MODCLASSActive {
         ServerWorld world = this.gameSpace.getWorld();
         long time = world.getTime();
 
-        MODCLASSStageManager.IdleTickResult result = this.stageManager.tick(time, gameSpace);
+        BlockGamesStageManager.IdleTickResult result = this.stageManager.tick(time, gameSpace);
 
         switch (result) {
             case CONTINUE_TICK:

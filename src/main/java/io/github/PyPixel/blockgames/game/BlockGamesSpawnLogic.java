@@ -1,4 +1,4 @@
-package org.example.MODNAME.game;
+package io.github.PyPixel.blockgames.game;
 
 import net.minecraft.util.math.Vec3d;
 import xyz.nucleoid.plasmid.game.GameSpace;
@@ -9,14 +9,14 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.GameMode;
-import org.example.MODNAME.MODCLASS;
-import org.example.MODNAME.game.map.MODCLASSMap;
+import io.github.PyPixel.blockgames.BlockGames;
+import io.github.PyPixel.blockgames.game.map.BlockGamesMap;
 
-public class MODCLASSSpawnLogic {
+public class BlockGamesSpawnLogic {
     private final GameSpace gameSpace;
-    private final MODCLASSMap map;
+    private final BlockGamesMap map;
 
-    public MODCLASSSpawnLogic(GameSpace gameSpace, MODCLASSMap map) {
+    public BlockGamesSpawnLogic(GameSpace gameSpace, BlockGamesMap map) {
         this.gameSpace = gameSpace;
         this.map = map;
     }
@@ -40,7 +40,7 @@ public class MODCLASSSpawnLogic {
 
         BlockPos pos = this.map.spawn;
         if (pos == null) {
-            MODCLASS.LOGGER.error("Cannot spawn player! No spawn is defined in the map!");
+            BlockGames.LOGGER.error("Cannot spawn player! No spawn is defined in the map!");
             return;
         }
 

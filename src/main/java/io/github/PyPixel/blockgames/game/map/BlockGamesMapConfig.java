@@ -1,4 +1,4 @@
-package org.example.MODNAME.game.map;
+package io.github.PyPixel.blockgames.game.map;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -7,14 +7,14 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 
-public class MODCLASSMapConfig {
-    public static final Codec<MODCLASSMapConfig> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+public class BlockGamesMapConfig {
+    public static final Codec<BlockGamesMapConfig> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             BlockState.CODEC.fieldOf("spawn_block").forGetter(map -> map.spawnBlock)
-    ).apply(instance, MODCLASSMapConfig::new));
+    ).apply(instance, BlockGamesMapConfig::new));
 
     public final BlockState spawnBlock;
 
-    public MODCLASSMapConfig(BlockState spawnBlock) {
+    public BlockGamesMapConfig(BlockState spawnBlock) {
         this.spawnBlock = spawnBlock;
     }
 }
